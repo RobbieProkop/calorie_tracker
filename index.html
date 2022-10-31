@@ -18,6 +18,7 @@
     <title>Calorie Tracker</title>
   </head>
   <body>
+    <!-- navbar -->
     <nav>
       <div class="nav-wrapper blue">
         <div class="container">
@@ -33,6 +34,7 @@
     <br />
 
     <div class="container">
+      <!-- form card -->
       <div class="card">
         <div class="card-content">
           <span class="card-title"> Add Meal / Food Item </span>
@@ -66,6 +68,21 @@
           </form>
         </div>
       </div>
+
+      <!-- Calorie Count -->
+      <h3 class="center-align">
+        Total Calories: <span class="total-calories">0</span>
+      </h3>
+
+      <!-- Item List -->
+      <ul id="item-list" class="collection">
+        <li class="collection-item" id="item-0">
+          <strong>Steak Dinner: </strong> <em>2100 Calories</em>
+          <a href="#" class="secondary-content">
+            <i class="fa fa-pencil"></i>
+          </a>
+        </li>
+      </ul>
     </div>
 
     <script

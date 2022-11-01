@@ -35,6 +35,11 @@ const ItemCtrl = (function () {
 // UI Controller
 
 const UICtrl = (function () {
+  //put in a variable in the event that the id changes
+  const UISelectors = {
+    itemList: "#item-list",
+  };
+
   // Public Methods to be returned
   return {
     populateItemList: (items) => {
@@ -52,7 +57,7 @@ const UICtrl = (function () {
       });
 
       //insert List Items
-      document.getElementById("item-list").innerHTML = html;
+      document.querySelector(UISelectors.itemList).innerHTML = html;
     },
   };
 })();

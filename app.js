@@ -203,8 +203,21 @@ const App = (function (ItemCtrl, UICtrl) {
       .querySelector(UISelectors.addBtn)
       .addEventListener("click", itemAddSubmit);
 
+    //disable submit with enter
+    document.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        return false;
+      }
+    });
+    // edit event
     document
       .querySelector(UISelectors.itemList)
+      .addEventListener("click", itemEditClick);
+
+    //  Update edit submit
+    document
+      .querySelector(UISelectors.updateBtn)
       .addEventListener("click", itemUpdateSubmit);
   };
 
@@ -236,7 +249,8 @@ const App = (function (ItemCtrl, UICtrl) {
     UICtrl.clearInput();
   };
 
-  const itemUpdateSubmit = (e) => {
+  //click edit btn
+  const itemEditClick = (e) => {
     e.preventDefault();
 
     //need to use event delegation because this class is not initially in the dom
@@ -256,6 +270,11 @@ const App = (function (ItemCtrl, UICtrl) {
       //add item to inputs
       UICtrl.addItemToForm();
     }
+  };
+
+  //edit submit
+  const itemUpdateSubmit = (e) => {
+    e.preventDefault();
   };
 
   //Public methods being returned

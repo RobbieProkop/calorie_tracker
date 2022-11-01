@@ -12,9 +12,19 @@ const ItemCtrl = (function () {
 
   //Data Structure / state
   const data = {
-    items: [],
+    items: [
+      { id: 0, name: "Steak Dinner", calories: 2100 },
+      { id: 1, name: "Cookie", calories: 200 },
+      { id: 2, name: "Oatmeal Breaky", calories: 800 },
+    ],
     currentItem: null,
     totalCalories: 0,
+  };
+
+  return {
+    logData: () => {
+      return data;
+    },
   };
 })();
 
@@ -25,4 +35,6 @@ const UICtrl = (function () {
 })();
 
 // App Controller
-const App = (function (ItemCtrl, UICtrl) {})(ItemCtrl, UICtrl);
+const App = (function (ItemCtrl, UICtrl) {
+  console.log("itemData :>> ", ItemCtrl.logData());
+})(ItemCtrl, UICtrl);

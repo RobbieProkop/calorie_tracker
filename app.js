@@ -1,4 +1,10 @@
 //Storeage Controller
+const StorageCtrl = (() => {
+  // public methods to be returned
+  return {
+    storeItem: () => {},
+  };
+})();
 
 // Item Controller
 

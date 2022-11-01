@@ -51,7 +51,8 @@ const UICtrl = (function () {
         `;
       });
 
-      return html;
+      //insert List Items
+      document.getElementById("item-list").innerHTML = html;
     },
   };
 })();

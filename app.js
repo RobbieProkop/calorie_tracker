@@ -21,7 +21,11 @@ const ItemCtrl = (function () {
     totalCalories: 0,
   };
 
+  // Public methods to be returned
   return {
+    getItems: () => {
+      return data.items;
+    },
     logData: () => {
       return data;
     },

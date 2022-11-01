@@ -13,6 +13,7 @@ const ItemCtrl = (function () {
   //Data Structure / state
   const data = {
     items: [
+      //harcoded data for testing
       // { id: 0, name: "Steak Dinner", calories: 2100 },
       // { id: 1, name: "Cookie", calories: 200 },
       // { id: 2, name: "Oatmeal Breaky", calories: 800 },
@@ -86,6 +87,8 @@ const UICtrl = (function () {
 
     //adding new item to UI list
     addListItem: (item) => {
+      //show list
+      document.querySelector(UISelectors.itemList).style.display = "block";
       //Create li element
       const li = document.createElement("li");
       //add classes
@@ -118,6 +121,10 @@ const UICtrl = (function () {
     clearInput: () => {
       document.querySelector(UISelectors.itemName).value = "";
       document.querySelector(UISelectors.itemCalories).value = "";
+    },
+
+    hideList: () => {
+      document.querySelector(UISelectors.itemList).style.display = "none";
     },
 
     //makes private selectors public
@@ -168,13 +175,16 @@ const App = (function (ItemCtrl, UICtrl) {
       //fetch items from data structure
       const items = ItemCtrl.getItems();
 
-      // Populate list with items
-      UICtrl.populateItemList(items);
+      //check if there are items
+      if (items.length === 0) {
+        UICtrl.hideList();
+      } else {
+        // Populate list with items
+        UICtrl.populateItemList(items);
+      }
 
       //load event listeners
       loadEventListeners();
-
-      UICtrl.getItemInput();
     },
   };
 })(ItemCtrl, UICtrl);

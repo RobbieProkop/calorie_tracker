@@ -31,11 +31,13 @@ const ItemCtrl = (function () {
 // UI Controller
 
 const UICtrl = (function () {
-  console.log("iife : UI ");
+  // Public Methods to be returned
+  return {};
 })();
 
 // App Controller
 const App = (function (ItemCtrl, UICtrl) {
+  //Public methods being returned
   return {
     init: () => {
       console.log("initializing");

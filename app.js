@@ -55,6 +55,21 @@ const ItemCtrl = (function () {
       return found[0];
     },
 
+    updateItem: (name, calories) => {
+      calories = parseInt(calories);
+
+      let found = null;
+      data.items.filter((item) => {
+        if (item.id === data.currentItem.id) {
+          item.name = name;
+          item.calories = calories;
+          found = item;
+        }
+      });
+      console.log("found", found);
+      return found;
+    },
+
     setCurrentItem: (item) => {
       data.currentItem = item;
     },
@@ -275,6 +290,10 @@ const App = (function (ItemCtrl, UICtrl) {
   //edit submit
   const itemUpdateSubmit = (e) => {
     e.preventDefault();
+    // Get Item input
+    const input = UICtrl.getItemInput();
+    // update item
+    const updatedItem = ItemCtrl.updateItem(input.name, input.calories);
   };
 
   //Public methods being returned

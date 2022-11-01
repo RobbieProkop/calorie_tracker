@@ -67,8 +67,6 @@ const UICtrl = (function () {
       const name = document.querySelector(UISelectors.itemName).value;
       const calories = document.querySelector(UISelectors.itemCalories).value;
 
-      console.log("name :>> ", name);
-      console.log("calories :>> ", calories);
       return {
         name,
         calories,
@@ -101,6 +99,11 @@ const App = (function (ItemCtrl, UICtrl) {
 
     // get form input
     const input = UICtrl.getItemInput();
+
+    //check for name and calorie input
+    if (!input.name || !input.calories) {
+      alert("yo. enter the fields!");
+    }
   };
 
   //Public methods being returned

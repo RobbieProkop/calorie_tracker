@@ -40,9 +40,10 @@ const ItemCtrl = (function () {
       //create new Item
       newItem = new Item(ID, name, calories);
 
+      //add to items array
       data.items.push(newItem);
 
-      UICtrl.populateItemList(data.items);
+      return newItem;
     },
     logData: () => {
       return data;
@@ -80,6 +81,26 @@ const UICtrl = (function () {
       //insert List Items
       document.querySelector(UISelectors.itemList).innerHTML = html;
     },
+
+    //adding new item to UI list
+    addListItem: (item) => {
+      //Create li element
+      const li = document.createElement("li");
+      //add classes
+      li.className = "collection-item";
+      // add id
+      li.id = `item-${item.id}`;
+      //add html
+      li.innerHTML = `<strong>${item.name}: </strong> <em>${item.calories} Calories</em>
+      <a href="#" class="secondary-content">
+        <i class="edit-item fa fa-pencil"></i>
+      </a>`;
+      //insert item
+      document
+        .querySelector(UISelectors.itemList)
+        .insertAdjacentElement("beforeend", li);
+    },
+
     //get item input
     getItemInput: () => {
       const name = document.querySelector(UISelectors.itemName).value;
@@ -125,6 +146,9 @@ const App = (function (ItemCtrl, UICtrl) {
     }
 
     const newItem = ItemCtrl.addItem(input.name, input.calories);
+
+    //add to UI list
+    UICtrl.addListItem(newItem);
   };
 
   //Public methods being returned

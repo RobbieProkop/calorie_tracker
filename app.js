@@ -12,6 +12,10 @@ const StorageCtrl = (() => {
       //set LS
       localStorage.setItem("items", JSON.stringify(items));
     },
+    getItemsFromStorage: () => {
+      let items = JSON.parse(localStorage.getItem("items")) || [];
+      return items;
+    },
   };
 })();
 
@@ -26,12 +30,7 @@ const ItemCtrl = (function () {
 
   //Data Structure / state
   const data = {
-    items: [
-      //harcoded data for testing
-      // { id: 0, name: "Steak Dinner", calories: 2100 },
-      // { id: 1, name: "Cookie", calories: 200 },
-      // { id: 2, name: "Oatmeal Breaky", calories: 800 },
-    ],
+    items: StorageCtrl.getItemsFromStorage(),
     currentItem: null,
     totalCalories: 0,
   };
@@ -39,6 +38,7 @@ const ItemCtrl = (function () {
   // Public methods to be returned
   return {
     getItems: () => {
+      console.log(data.items);
       return data.items;
     },
 
@@ -111,11 +111,12 @@ const ItemCtrl = (function () {
 
     getTotalCalories: () => {
       let totalCalories = 0;
+      console.log("1: totalCalories :>> ", totalCalories);
 
       data.items.forEach((item) => {
         totalCalories += item.calories;
       });
-
+      console.log("2: totalCalories :>> ", totalCalories);
       // set total cal in data structure
       return (data.totalCalories = totalCalories);
     },
@@ -455,6 +456,11 @@ const App = (function (ItemCtrl, StorageCtrl, UICtrl) {
       if (items.length === 0) {
         UICtrl.hideList();
       } else {
+        //get total calories
+        const totalCalories = ItemCtrl.getTotalCalories();
+
+        //add total calories to html
+        UICtrl.showTotalCalories(totalCalories);
         // Populate list with items
         UICtrl.populateItemList(items);
       }

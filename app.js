@@ -13,9 +13,9 @@ const ItemCtrl = (function () {
   //Data Structure / state
   const data = {
     items: [
-      { id: 0, name: "Steak Dinner", calories: 2100 },
-      { id: 1, name: "Cookie", calories: 200 },
-      { id: 2, name: "Oatmeal Breaky", calories: 800 },
+      // { id: 0, name: "Steak Dinner", calories: 2100 },
+      // { id: 1, name: "Cookie", calories: 200 },
+      // { id: 2, name: "Oatmeal Breaky", calories: 800 },
     ],
     currentItem: null,
     totalCalories: 0,
@@ -24,21 +24,25 @@ const ItemCtrl = (function () {
   // Public methods to be returned
   return {
     getItems: () => {
+      console.log("data :>> ", data);
       return data.items;
     },
     addItem: (name, calories) => {
       let ID;
       //create id
       if (data.items.length <= 0) {
-        return (ID = 0);
+        ID = 0;
       }
-      ID = data.items[data.items.length - 1].id + 1;
+      if (data.items.length > 0) {
+        ID = data.items[data.items.length - 1].id + 1;
+      }
 
       //calories to number
       calories = Number(calories);
 
       //create new Item
       newItem = new Item(ID, name, calories);
+      console.log("newItem :>> ", newItem);
 
       //add to items array
       data.items.push(newItem);
@@ -89,6 +93,7 @@ const UICtrl = (function () {
       //add classes
       li.className = "collection-item";
       // add id
+      console.log("item :>> ", item);
       li.id = `item-${item.id}`;
       //add html
       li.innerHTML = `<strong>${item.name}: </strong> <em>${item.calories} Calories</em>
@@ -99,6 +104,7 @@ const UICtrl = (function () {
       document
         .querySelector(UISelectors.itemList)
         .insertAdjacentElement("beforeend", li);
+      console.log("li :>> ", li);
     },
 
     //get item input
@@ -149,8 +155,9 @@ const App = (function (ItemCtrl, UICtrl) {
       //Add custom error message
       return alert("yo. enter the fields!");
     }
-
+    console.log("input :>> ", input);
     const newItem = ItemCtrl.addItem(input.name, input.calories);
+    console.log(newItem);
 
     //add to UI list
     UICtrl.addListItem(newItem);

@@ -27,7 +27,22 @@ const ItemCtrl = (function () {
       return data.items;
     },
     addItem: (name, calories) => {
-      console.log("name, calories :>> ", name, calories);
+      let ID;
+      //create id
+      if (data.items.length <= 0) {
+        return (ID = 0);
+      }
+      ID = data.items[data.items.length - 1].id + 1;
+
+      //calories to number
+      calories = Number(calories);
+
+      //create new Item
+      newItem = new Item(ID, name, calories);
+
+      data.items.push(newItem);
+
+      UICtrl.populateItemList(data.items);
     },
     logData: () => {
       return data;

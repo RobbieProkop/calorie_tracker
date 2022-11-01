@@ -39,6 +39,8 @@ const UICtrl = (function () {
   const UISelectors = {
     itemList: "#item-list",
     addBtn: ".add-btn",
+    itemName: "#item-name",
+    itemCalories: "#item-calories",
   };
 
   // Public Methods to be returned
@@ -62,9 +64,11 @@ const UICtrl = (function () {
     },
     //get item input
     getItemInput: () => {
-      const name = document.getElementById("item-name").value;
-      const calories = document.getElementById("item-calories").value;
+      const name = document.querySelector(UISelectors.itemName).value;
+      const calories = document.querySelector(UISelectors.itemCalories).value;
 
+      console.log("name :>> ", name);
+      console.log("calories :>> ", calories);
       return {
         name,
         calories,

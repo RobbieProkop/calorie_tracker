@@ -38,7 +38,6 @@ const ItemCtrl = (function () {
   // Public methods to be returned
   return {
     getItems: () => {
-      console.log(data.items);
       return data.items;
     },
 
@@ -80,7 +79,6 @@ const ItemCtrl = (function () {
           found = item;
         }
       });
-      console.log("found", found);
       return found;
     },
 
@@ -111,12 +109,10 @@ const ItemCtrl = (function () {
 
     getTotalCalories: () => {
       let totalCalories = 0;
-      console.log("1: totalCalories :>> ", totalCalories);
 
       data.items.forEach((item) => {
         totalCalories += item.calories;
       });
-      console.log("2: totalCalories :>> ", totalCalories);
       // set total cal in data structure
       return (data.totalCalories = totalCalories);
     },
@@ -215,9 +211,11 @@ const UICtrl = (function () {
     },
 
     deleteListItem: (id) => {
+      console.log("id", id);
       const itemID = `#item-${id}`;
 
       const item = document.querySelector(itemID);
+      console.log("item :>> ", item);
       item.remove();
     },
 

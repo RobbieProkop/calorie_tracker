@@ -24,7 +24,6 @@ const ItemCtrl = (function () {
   // Public methods to be returned
   return {
     getItems: () => {
-      console.log("data :>> ", data);
       return data.items;
     },
     addItem: (name, calories) => {
@@ -42,7 +41,6 @@ const ItemCtrl = (function () {
 
       //create new Item
       newItem = new Item(ID, name, calories);
-      console.log("newItem :>> ", newItem);
 
       //add to items array
       data.items.push(newItem);
@@ -93,7 +91,7 @@ const UICtrl = (function () {
       //add classes
       li.className = "collection-item";
       // add id
-      console.log("item :>> ", item);
+
       li.id = `item-${item.id}`;
       //add html
       li.innerHTML = `<strong>${item.name}: </strong> <em>${item.calories} Calories</em>
@@ -104,7 +102,6 @@ const UICtrl = (function () {
       document
         .querySelector(UISelectors.itemList)
         .insertAdjacentElement("beforeend", li);
-      console.log("li :>> ", li);
     },
 
     //get item input
@@ -155,9 +152,8 @@ const App = (function (ItemCtrl, UICtrl) {
       //Add custom error message
       return alert("yo. enter the fields!");
     }
-    console.log("input :>> ", input);
+
     const newItem = ItemCtrl.addItem(input.name, input.calories);
-    console.log(newItem);
 
     //add to UI list
     UICtrl.addListItem(newItem);

@@ -55,6 +55,14 @@ const ItemCtrl = (function () {
       return found[0];
     },
 
+    setCurrentItem: (item) => {
+      data.currentItem = item;
+    },
+
+    getCurrentItem: () => {
+      return data.currentItem;
+    },
+
     getTotalCalories: () => {
       let totalCalories = 0;
 
@@ -144,6 +152,13 @@ const UICtrl = (function () {
       document.querySelector(UISelectors.itemCalories).value = "";
     },
 
+    addItemToForm: () => {
+      document.querySelector(UISelectors.itemName).value =
+        ItemCtrl.getCurrentItem().name;
+      document.querySelector(UISelectors.itemCalories).value =
+        ItemCtrl.getCurrentItem().calories;
+    },
+
     hideList: () => {
       document.querySelector(UISelectors.itemList).style.display = "none";
     },
@@ -229,6 +244,9 @@ const App = (function (ItemCtrl, UICtrl) {
       const itemToEdit = ItemCtrl.getItemById(id);
       //set current item
       ItemCtrl.setCurrentItem(itemToEdit);
+
+      //add item to inputs
+      UICtrl.addItemToForm();
     }
   };
 

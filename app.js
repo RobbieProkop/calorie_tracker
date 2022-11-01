@@ -101,6 +101,7 @@ const UICtrl = (function () {
   //put in a variable in the event that the id changes
   const UISelectors = {
     itemList: "#item-list",
+    listItems: "#item-list li",
     addBtn: ".add-btn",
     updateBtn: ".update-btn",
     deleteBtn: ".delete-btn",
@@ -160,6 +161,25 @@ const UICtrl = (function () {
         name,
         calories,
       };
+    },
+
+    updateListItem: (item) => {
+      let listItems = document.querySelectorAll(UISelectors.listItems);
+
+      //iterate through node list. first need an array
+      listItems = Array.from(listItems);
+
+      listItems.forEach((listItem) => {
+        const itemID = listItem.getAttribute("id");
+
+        if (itemID === `item-${item.id}`) {
+          document.querySelector(`#${itemID}`).innerHTML = `
+          <strong>${item.name}: </strong> <em>${item.calories} Calories</em>
+          <a href="#" class="secondary-content">
+            <i class="edit-item fa fa-pencil"></i>
+          </a>`;
+        }
+      });
     },
 
     clearInput: () => {
@@ -294,6 +314,9 @@ const App = (function (ItemCtrl, UICtrl) {
     const input = UICtrl.getItemInput();
     // update item
     const updatedItem = ItemCtrl.updateItem(input.name, input.calories);
+
+    //  update UI
+    UICtrl.updateListItem(updatedItem);
   };
 
   //Public methods being returned

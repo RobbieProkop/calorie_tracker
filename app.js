@@ -60,6 +60,17 @@ const UICtrl = (function () {
       //insert List Items
       document.querySelector(UISelectors.itemList).innerHTML = html;
     },
+    //get item input
+    getItemInput: () => {
+      const name = document.getElementById("item-name").value;
+      const calories = document.getElementById("item-calories").value;
+
+      return {
+        name,
+        calories,
+      };
+    },
+
     //makes private selectors public
     getSelectors: () => {
       return UISelectors;
@@ -83,6 +94,9 @@ const App = (function (ItemCtrl, UICtrl) {
   // add Item submit
   const itemAddSubmit = (e) => {
     e.preventDefault();
+
+    // get form input
+    const input = UICtrl.getItemInput();
   };
 
   //Public methods being returned
@@ -92,8 +106,12 @@ const App = (function (ItemCtrl, UICtrl) {
       const items = ItemCtrl.getItems();
 
       // Populate list with items
-
       UICtrl.populateItemList(items);
+
+      //load event listeners
+      loadEventListeners();
+
+      UICtrl.getItemInput();
     },
   };
 })(ItemCtrl, UICtrl);

@@ -220,6 +220,17 @@ const UICtrl = (function () {
       UICtrl.showEditState();
     },
 
+    removeItems: () => {
+      let listItems = document.querySelectorAll(UISelectors.listItems);
+
+      //  turn node list into an array
+      listItems = Array.from(listItems);
+
+      listItems.forEach((item) => {
+        item.remove();
+      });
+    },
+
     hideList: () => {
       document.querySelector(UISelectors.itemList).style.display = "none";
     },
@@ -387,6 +398,10 @@ const App = (function (ItemCtrl, UICtrl) {
     UICtrl.showTotalCalories(totalCalories);
 
     UICtrl.clearEditState();
+
+    if (!ItemCtrl.data) {
+      UICtrl.hideList();
+    }
   };
 
   //clear all event
@@ -395,6 +410,20 @@ const App = (function (ItemCtrl, UICtrl) {
 
     // delete all items from data structure
     ItemCtrl.clearAllItems();
+
+    //get total calories
+    const totalCalories = ItemCtrl.getTotalCalories();
+
+    //add total calories to html
+    UICtrl.showTotalCalories(totalCalories);
+
+    UICtrl.clearEditState();
+
+    // Remove from UI
+    UICtrl.removeItems();
+
+    //hide ul
+    UICtrl.hideList();
   };
 
   //Public methods being returned

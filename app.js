@@ -2,12 +2,20 @@
 const StorageCtrl = (() => {
   // public methods to be returned
   return {
-    storeItem: () => {},
+    storeItem: (item) => {
+      //get from LS, or else set as empty array
+      let items = JSON.parse(localStorage.getItem("items")) || [];
+
+      //push the new item to the items array
+      items.push(item);
+
+      //set LS
+      localStorage.setItem("items", JSON.stringify(items));
+    },
   };
 })();
 
 // Item Controller
-
 const ItemCtrl = (function () {
   // Item Constructor
   const Item = function (id, name, calories) {
@@ -119,7 +127,6 @@ const ItemCtrl = (function () {
 })();
 
 // UI Controller
-
 const UICtrl = (function () {
   //put in a variable in the event that the id changes
   const UISelectors = {
@@ -269,7 +276,7 @@ const UICtrl = (function () {
 })();
 
 // App Controller
-const App = (function (ItemCtrl, UICtrl) {
+const App = (function (ItemCtrl, StorageCtrl, UICtrl) {
   //add event listener function
   const loadEventListeners = () => {
     //get UI selectors
@@ -336,6 +343,9 @@ const App = (function (ItemCtrl, UICtrl) {
 
     //add total calories to html
     UICtrl.showTotalCalories(totalCalories);
+
+    //Add to local Storage
+    StorageCtrl.storeItem(newItem);
 
     //clear inputs
     UICtrl.clearInput();
@@ -453,7 +463,7 @@ const App = (function (ItemCtrl, UICtrl) {
       loadEventListeners();
     },
   };
-})(ItemCtrl, UICtrl);
+})(ItemCtrl, StorageCtrl, UICtrl);
 
 //Initialize App
 App.init();

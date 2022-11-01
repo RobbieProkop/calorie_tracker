@@ -26,6 +26,9 @@ const ItemCtrl = (function () {
     getItems: () => {
       return data.items;
     },
+    addItem: (name, calories) => {
+      console.log("name, calories :>> ", name, calories);
+    },
     logData: () => {
       return data;
     },
@@ -102,8 +105,11 @@ const App = (function (ItemCtrl, UICtrl) {
 
     //check for name and calorie input
     if (!input.name || !input.calories) {
-      alert("yo. enter the fields!");
+      //Add custom error message
+      return alert("yo. enter the fields!");
     }
+
+    const newItem = ItemCtrl.addItem(input.name, input.calories);
   };
 
   //Public methods being returned

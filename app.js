@@ -112,6 +112,11 @@ const UICtrl = (function () {
       };
     },
 
+    clearInput: () => {
+      document.querySelector(UISelectors.itemName).value = "";
+      document.querySelector(UISelectors.itemCalories).value = "";
+    },
+
     //makes private selectors public
     getSelectors: () => {
       return UISelectors;
@@ -149,6 +154,9 @@ const App = (function (ItemCtrl, UICtrl) {
 
     //add to UI list
     UICtrl.addListItem(newItem);
+
+    //clear inputs
+    UICtrl.clearInput();
   };
 
   //Public methods being returned

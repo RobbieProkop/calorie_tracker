@@ -50,6 +50,11 @@ const ItemCtrl = (function () {
       return newItem;
     },
 
+    getItemById: (id) => {
+      const found = data.items.filter((item) => item.id === id);
+      return found[0];
+    },
+
     getTotalCalories: () => {
       let totalCalories = 0;
 
@@ -174,6 +179,10 @@ const App = (function (ItemCtrl, UICtrl) {
     document
       .querySelector(UISelectors.addBtn)
       .addEventListener("click", itemAddSubmit);
+
+    document
+      .querySelector(UISelectors.itemList)
+      .addEventListener("click", itemUpdateSubmit);
   };
 
   // add Item submit
@@ -202,6 +211,25 @@ const App = (function (ItemCtrl, UICtrl) {
 
     //clear inputs
     UICtrl.clearInput();
+  };
+
+  const itemUpdateSubmit = (e) => {
+    e.preventDefault();
+
+    //need to use event delegation because this class is not initially in the dom
+    if (e.target.classList.contains("edit-item")) {
+      //get list item id
+      const listId = e.target.parentElement.parentElement.id;
+
+      // Break into an array
+      const listIdArr = listId.split("-");
+      // get id
+      const id = Number(listIdArr[1]);
+      //get item
+      const itemToEdit = ItemCtrl.getItemById(id);
+      //set current item
+      ItemCtrl.setCurrentItem(itemToEdit);
+    }
   };
 
   //Public methods being returned

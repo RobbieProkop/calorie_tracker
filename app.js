@@ -27,6 +27,7 @@ const StorageCtrl = (() => {
         localStorage.setItem("items", JSON.stringify(items));
       });
     },
+    deleteItemFromStorage: (id) => {},
   };
 })();
 
@@ -426,11 +427,10 @@ const App = (function (ItemCtrl, StorageCtrl, UICtrl) {
     //add total calories to html
     UICtrl.showTotalCalories(totalCalories);
 
-    UICtrl.clearEditState();
+    //Delete from LS
+    StorageCtrl.deleteItemFromStorage(currentItem.id);
 
-    if (!ItemCtrl.data) {
-      UICtrl.hideList();
-    }
+    UICtrl.clearEditState();
   };
 
   //clear all event

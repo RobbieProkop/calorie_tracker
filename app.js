@@ -3,7 +3,19 @@
 // Item Controller
 
 const ItemCtrl = (function () {
-  console.log("iife :>> ");
+  // Item Constructor
+  const Item = function (id, name, calories) {
+    this.id = id;
+    this.name = name;
+    this.calories = calories;
+  };
+
+  //Data Structure / state
+  const data = {
+    items: [],
+    currentItem: null,
+    totalCalories: 0,
+  };
 })();
 
 // UI Controller

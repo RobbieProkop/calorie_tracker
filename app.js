@@ -74,6 +74,9 @@ const UICtrl = (function () {
   const UISelectors = {
     itemList: "#item-list",
     addBtn: ".add-btn",
+    updateBtn: ".update-btn",
+    deleteBtn: ".delete-btn",
+    backBtn: ".back-btn",
     itemName: "#item-name",
     itemCalories: "#item-calories",
     totalCalories: ".total-calories",
@@ -143,6 +146,14 @@ const UICtrl = (function () {
     showTotalCalories: (totalCalories) => {
       document.querySelector(UISelectors.totalCalories).textContent =
         totalCalories;
+    },
+
+    clearEditState: () => {
+      UICtrl.clearInput();
+      document.querySelector(UISelectors.updateBtn).style.display = "none";
+      document.querySelector(UISelectors.deleteBtn).style.display = "none";
+      document.querySelector(UISelectors.backBtn).style.display = "none";
+      document.querySelector(UISelectors.addBtn).style.display = "inline";
     },
 
     //makes private selectors public

@@ -38,6 +38,7 @@ const UICtrl = (function () {
   //put in a variable in the event that the id changes
   const UISelectors = {
     itemList: "#item-list",
+    addBtn: ".add-btn",
   };
 
   // Public Methods to be returned
@@ -59,11 +60,31 @@ const UICtrl = (function () {
       //insert List Items
       document.querySelector(UISelectors.itemList).innerHTML = html;
     },
+    //makes private selectors public
+    getSelectors: () => {
+      return UISelectors;
+    },
   };
 })();
 
 // App Controller
 const App = (function (ItemCtrl, UICtrl) {
+  //add event listener function
+  const loadEventListeners = () => {
+    //get UI selectors
+    const UISelectors = UICtrl.getSelectors();
+
+    //add event
+    document
+      .querySelector(UISelectors.addBtn)
+      .addEventListener("click", itemAddSubmit);
+  };
+
+  // add Item submit
+  const itemAddSubmit = (e) => {
+    e.preventDefault();
+  };
+
   //Public methods being returned
   return {
     init: () => {
